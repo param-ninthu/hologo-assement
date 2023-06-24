@@ -8,12 +8,24 @@ import Card from "react-bootstrap/Card";
 import "./../assets/css/login-allocation.css";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { addstudent } from "../features/Sutdents";
 
 const LoginAllocation = () => {
+  const dispatch = useDispatch();
+  const student = useSelector((state) => state.student.value);
+  // console.log(student);
+
+  const [email, setEmail] = useState({ student });
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addstudent(email));
+  };
 
   return (
     <Container className="container" fluid>
@@ -24,22 +36,23 @@ const LoginAllocation = () => {
             <Form.Control type="email" placeholder="Enter email" />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={onSubmit}>
             Allocate Student
           </Button>
         </Form>
       </Row>
+
       <Row className="row">
-        <Col></Col>
-      </Row>
-      <Row className="row">
-        <Card>
-          <Card.Body>Student Email : ninthu1999@gmail.com</Card.Body>
-          <Card.Body>
-            {" "}
-            <Button onClick={handleShow}>Update</Button> <Button>Delete</Button>{" "}
-          </Card.Body>
-        </Card>
+        {student.map((student) => (
+          <Card className="email-card">
+            <Card.Body>Student Email :{student.email}</Card.Body>
+            <Card.Body>
+              {" "}
+              <Button onClick={handleShow}>Update</Button>{" "}
+              <Button>Delete</Button>{" "}
+            </Card.Body>
+          </Card>
+        ))}
       </Row>
 
       <Modal show={show} onHide={handleClose}>

@@ -4,11 +4,20 @@
 }
 
 .container .row{
-    background-color: #93c3f3;
+    /* background-color: #93c3f3; */
     margin-top: 2rem;
 }
 
 .container .row-form{
+    background-color: #ffffff;
+    border: 1px solid #93c3f3;
+    border-radius: 5px;
+    padding:10px;
+}
+
+
+.email-card{
+    margin-top: 2rem;
     background-color: #ffffff;
     border: 1px solid #93c3f3;
     border-radius: 5px;
